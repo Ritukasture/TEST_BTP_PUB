@@ -1,0 +1,127 @@
+managed;
+strict ( 2 );
+with draft;
+
+define behavior for ZMK_I_PRODUCT_R //alias <alias_name>
+implementation in class zbp_mk_i_product_r unique
+persistent table ztb_mk_product
+draft table ztb_mk_product_d
+lock master total etag last_changed_at
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  field ( readonly ) ProdUuid;
+  field ( numbering : managed )
+  ProdUUID;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  association _market { create; with draft; }
+  association _order { create; with draft; }
+
+  mapping for ztb_mk_product
+    {
+      ProdUuid        = Prod_uuid;
+      prodid          = prodid;
+      pgid            = pgid;
+      phaseid         = phaseid;
+      pgname          = pgname;
+      height          = height;
+      depth           = depth;
+      width           = width;
+      sizeuom         = size_uom;
+      price           = price;
+      PriceCurrency   = price_currency;
+      taxrate         = taxrate;
+      CreatedBy       = created_by;
+      CreationTime    = creation_time;
+      ChangedBy       = changed_by;
+      ChangeTime      = change_time;
+      last_changed_at = last_changed_at;
+    }
+}
+
+define behavior for ZMK_I_MARKET
+implementation in class zbp_mk_i_market unique
+persistent table ztb_mk_market
+draft table ztb_mk_market_d
+lock dependent by _product
+//lock master total etag last_changed_at
+authorization dependent by _product
+//authorization master ( instance )
+etag master last_changed_at
+{
+
+  //create;
+  update;
+  delete;
+
+  field ( readonly ) ProdUuid;
+  //field ( readonly ) MrktUuid;
+  field ( numbering : managed, readonly ) MrktUuid;
+  association _product { with draft; }
+
+  mapping for ztb_mk_market
+    {
+      ProdUuid        = Prod_uuid;
+      MrktUuid        = mrkt_uuid;
+      Mrktid          = mrktid;
+      Status          = status;
+      Startdate       = startdate;
+      Enddate         = enddate;
+      CreatedBy       = created_by;
+      CreationTime    = creation_time;
+      ChangedBy       = changed_by;
+      ChangeTime      = change_time;
+      last_changed_at = last_changed_at;
+    }
+
+}
+
+define behavior for ZMK_I_ORDER
+implementation in class zbp_mk_i_order unique
+persistent table ztb_mk_order
+draft table ztb_mk_order_d
+lock dependent by _product
+//lock master total etag last_changed_at
+authorization dependent by _product
+//authorization master ( instance )
+etag master last_changed_at
+{
+
+  //create;
+  update;
+  delete;
+
+  field ( readonly ) ProdUuid;
+  //field ( readonly ) MrktUuid;
+  field ( numbering : managed, readonly ) MrktUuid;
+  field ( numbering : managed, readonly ) OrderUuid;
+  association _product { with draft; }
+
+  mapping for ztb_mk_order
+    {
+      ProdUuid        = prod_uuid;
+      MrktUuid        = mrkt_uuid;
+      OrderUuid       = order_uuid;
+      Orderid         = orderid;
+      Quantity        = quantity;
+      CalendarYear    = calendar_year;
+      Netamount       = netamount;
+      CukyField       = cuky_field;
+      Amountcurr      = amountcurr;
+      CreatedBy       = created_by;
+      CreationTime    = creation_time;
+      ChangedBy       = changed_by;
+      ChangeTime      = change_time;
+      last_changed_at = last_changed_at;
+    }
+
+}

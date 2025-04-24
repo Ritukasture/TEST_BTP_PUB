@@ -1,0 +1,55 @@
+@Metadata.layer: #CORE
+@UI: {
+    headerInfo : { typeName: 'Order Details',
+                   typeNamePlural: 'Order Details1' }}
+annotate entity ZMK_C_ORDER with
+{
+
+//  @UI.facet: [
+//   {
+//    id: 'idIdentification',
+//    type: #IDENTIFICATION_REFERENCE,
+//    label: 'Order',
+//    position: 10
+//  }  ]
+
+  @UI:{  lineItem:       [{ position: 10, label:'ProdUuid' }] }
+  @UI.identification: [ { position: 10 , label: 'ProdUuid' } ]
+  ProdUuid;
+  @UI:{  lineItem:       [{ position: 20, label:'MrktUuid' }] }
+  @UI.identification: [ { position: 20 , label: 'MrktUuid' } ]
+  MrktUuid;
+  @UI:{  lineItem:       [{ position: 30, label:'OrderUuid' }] }
+  @UI.identification: [ { position: 30 , label: 'OrderUuid' } ]
+  OrderUuid;
+  @UI:{  lineItem:       [{ position: 40, label:'Orderid' }] }
+  @UI.identification: [ { position: 40 , label: 'Orderid' } ]
+  Orderid;
+  @UI:{  lineItem:       [{ position: 50, label:'Quantity' }] }
+  @UI.identification: [ { position: 50 , label: 'Quantity' } ]
+  Quantity;
+  @UI:{  lineItem:       [{ position: 60, label:'CalendarYear' }] }
+  @UI.identification: [ { position: 60 , label: 'CalendarYear' } ]
+  CalendarYear;
+  @UI:{  lineItem:       [{ position: 70, label:'Netamount' }] }
+  @UI.identification: [ { position: 70 , label: 'Netamount' } ]
+  Netamount;
+  @UI:{  lineItem:       [{ position: 80, label:'CukyField' }] }
+  @UI.identification: [ { position: 80 , label: 'CukyField' } ]
+  CukyField;
+  @UI:{  lineItem:       [{ position: 90, label:'Amountcurr' }] }
+  @UI.identification: [ { position: 90 , label: 'Amountcurr' } ]
+  Amountcurr;
+  @UI:{  lineItem:       [{ position: 100, label:'CareatedBy' }] }
+  @UI.identification: [ { position: 100 , label: 'CareatedBy' } ]
+  CreatedBy;
+  @UI:{  lineItem:       [{ position: 110, label:'CreationTime' }] }
+  @UI.identification: [ { position: 110 , label: 'CreationTime' } ]
+  CreationTime;
+  @UI:{  lineItem:       [{ position: 120, label:'ChangedBy' }] }
+  @UI.identification: [ { position: 120 , label: 'ChangedBy' } ]
+  ChangedBy;
+  @UI:{  lineItem:       [{ position: 130, label:'ChangeTime' }] }
+  @UI.identification: [ { position: 130 , label: 'ChangeTime' } ]
+  ChangeTime;
+}

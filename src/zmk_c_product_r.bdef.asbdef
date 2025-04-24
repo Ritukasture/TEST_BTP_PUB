@@ -1,0 +1,38 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZMK_C_PRODUCT_R //alias <alias_name>
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _market { create; with draft; }
+  use association _order { create; with draft; }
+}
+
+define behavior for ZMK_C_MARKET//alias <alias_name>
+use etag
+{
+  use update;
+  use delete;
+
+  use association _product { with draft; }
+}
+
+define behavior for ZMK_C_ORDER//alias <alias_name>
+use etag
+{
+  use update;
+  use delete;
+
+  use association _product { with draft; }
+}

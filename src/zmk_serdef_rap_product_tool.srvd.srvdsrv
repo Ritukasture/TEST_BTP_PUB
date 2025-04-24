@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service definitionn'
+define service ZMK_SERDEF_RAP_PRODUCT_TOOL {
+  expose ZMK_C_PRODUCT_R;
+  expose ZMK_C_MARKET;
+  expose ZMK_C_ORDER;
+}
