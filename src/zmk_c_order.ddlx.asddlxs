@@ -1,17 +1,19 @@
 @Metadata.layer: #CORE
 @UI: {
     headerInfo : { typeName: 'Order Details',
-                   typeNamePlural: 'Order Details1' }}
+                   typeNamePlural: 'Order Details1',
+                   title: { value: 'ProdUuid'} }}
+                   
 annotate entity ZMK_C_ORDER with
 {
 
-//  @UI.facet: [
-//   {
-//    id: 'idIdentification',
-//    type: #IDENTIFICATION_REFERENCE,
-//    label: 'Order',
-//    position: 10
-//  }  ]
+  @UI.facet: [
+   {
+    id: 'idIdentification',
+    type: #IDENTIFICATION_REFERENCE,
+    label: 'Order',
+    position: 10
+  }  ]
 
   @UI:{  lineItem:       [{ position: 10, label:'ProdUuid' }] }
   @UI.identification: [ { position: 10 , label: 'ProdUuid' } ]

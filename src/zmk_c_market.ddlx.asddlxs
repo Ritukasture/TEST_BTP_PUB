@@ -1,21 +1,23 @@
 @Metadata.layer: #CORE
 @UI: {
     headerInfo : { typeName: 'MARKET Details',
-                   typeNamePlural: 'Market Details1' }}
+                   typeNamePlural: 'Market Details1',
+                   title: { value: 'ProdUuid' } } }
 
 annotate entity ZMK_I_MARKET with
 {
 
-//  @UI.facet: [
-//   {
-//    id: 'idIdentification',
-//    type: #IDENTIFICATION_REFERENCE,
-//    label: 'Order',
-//    position: 10
-//  }  ]
+  @UI.facet: [
+   {
+    id: 'idIdentification',
+    type: #IDENTIFICATION_REFERENCE,
+    label: 'Market',
+    position: 10
+    
+  }  ]
 
   @UI:{  lineItem:       [{ position: 10, label:'ProdUuid' }] }
-  //@UI.identification: [ { position: 10 , label: 'ProdUuid' } ]
+  @UI.identification: [ { position: 10 , label: 'ProdUuid' } ]
   ProdUuid;
   @UI:{  lineItem:       [{ position: 20, label:'MrktUuid' }] }
   @UI.identification: [ { position: 20 , label: 'MrktUuid' } ]

@@ -3,9 +3,9 @@
 @UI: {
   headerInfo: { typeName: 'Product Details',
                 typeNamePlural: 'Product Details1',
-                title: { type: #STANDARD, label: 'Product Details' },
+                title: { type: #STANDARD, label: 'Product Details', value: 'ProdUuid'  },
                 description : { type: #STANDARD,label: 'Product' } } }
-                
+
 annotate entity ZMK_C_PRODUCT_R with
 {
   @UI.facet: [
@@ -13,7 +13,7 @@ annotate entity ZMK_C_PRODUCT_R with
     id: 'idIdentification',
     type: #IDENTIFICATION_REFERENCE,
     label: 'ZC_TB_MK_PRODUCT',
-    position: 10
+    position: 10 
   } ,
 
   {
@@ -30,32 +30,20 @@ annotate entity ZMK_C_PRODUCT_R with
   label: 'Order',
   position: 40,
   targetElement: '_order'
-  } 
+  }
   ]
 
-  @UI.hidden: true
+  //@UI.hidden: true
   ProdUuid;
 
-  @UI.lineItem: [ {
-    position: 10 ,
-    importance: #MEDIUM,
-    label: 'ProdID'
-  } ]
-  @UI.identification: [ {
-    position: 10 ,
-    label: 'ProdID'
-  } ]
+  @UI: { selectionField: [{ position: 10}] }
+  @UI.lineItem: [ { position: 10 ,importance: #MEDIUM, label: 'ProdID' } ]
+  @UI.identification: [ { position: 10 , label: 'ProdID' } ]
   Prodid;
 
-  @UI.lineItem: [ {
-    position: 20 ,
-    importance: #MEDIUM,
-    label: 'PgID'
-  } ]
-  @UI.identification: [ {
-    position: 20 ,
-    label: 'PgID'
-  } ]
+  @UI: { selectionField: [{ position: 20}] }
+  @UI.lineItem: [ { position: 20 , importance: #MEDIUM, label: 'PgID' } ]
+  @UI.identification: [ { position: 20 , label: 'PgID'} ]
   Pgid;
 
   @UI.lineItem: [ {
@@ -157,6 +145,7 @@ annotate entity ZMK_C_PRODUCT_R with
   } ]
   Taxrate;
 
+  @UI: { selectionField: [{ position: 30}] }
   @UI.lineItem: [ {
     position: 120 ,
     importance: #MEDIUM,
@@ -179,15 +168,9 @@ annotate entity ZMK_C_PRODUCT_R with
   } ]
   CreationTime;
 
-  @UI.lineItem: [ {
-    position: 140 ,
-    importance: #MEDIUM,
-    label: 'ChangedBy'
-  } ]
-  @UI.identification: [ {
-    position: 140 ,
-    label: 'ChangedBy'
-  } ]
+  @UI: { selectionField: [{ position: 40}] }
+  @UI.lineItem: [ { position: 140 ,importance: #MEDIUM, label: 'ChangedBy' } ]
+  @UI.identification: [ { position: 140 ,label: 'ChangedBy'} ]
   ChangedBy;
 
   @UI.lineItem: [ {

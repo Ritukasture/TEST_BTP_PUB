@@ -1,4 +1,4 @@
-managed;
+managed implementation in class zbp_mk_i_save unique;
 strict ( 2 );
 with draft;
 
@@ -57,6 +57,7 @@ lock dependent by _product
 authorization dependent by _product
 //authorization master ( instance )
 etag master last_changed_at
+with additional save
 {
 
   //create;
@@ -87,13 +88,14 @@ etag master last_changed_at
 
 define behavior for ZMK_I_ORDER
 implementation in class zbp_mk_i_order unique
-persistent table ztb_mk_order
+//persistent table ztb_mk_order
 draft table ztb_mk_order_d
 lock dependent by _product
 //lock master total etag last_changed_at
 authorization dependent by _product
 //authorization master ( instance )
 etag master last_changed_at
+with unmanaged save with full data
 {
 
   //create;
