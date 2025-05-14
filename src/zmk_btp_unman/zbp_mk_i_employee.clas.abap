@@ -1,0 +1,7 @@
+CLASS zbp_mk_i_employee DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zmk_i_employee.
+
+ENDCLASS.
+
+CLASS zbp_mk_i_employee IMPLEMENTATION.
+
+ENDCLASS.

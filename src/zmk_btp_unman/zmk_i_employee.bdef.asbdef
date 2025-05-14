@@ -1,0 +1,22 @@
+unmanaged implementation in class zbp_mk_i_employee unique;
+strict ( 2 );
+//with draft;
+
+define behavior for ZMK_I_EMPLOYEE //alias <alias_name>
+late numbering
+lock master// total etag last_changed_at
+//draft table ztb_mk_employee_d
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  field ( readonly ) Num;
+
+//  draft action Edit;
+//  draft action Activate optimized;
+//  draft action Discard;
+//  draft action Resume;
+//  draft determine action Prepare;
+}

@@ -14,6 +14,8 @@ authorization master ( instance )
   update;
   delete;
   field ( readonly ) ProdUuid;
+  field ( mandatory ) prodid;
+  // field ( mandatory : create, readonly : update ) prodid;
   field ( numbering : managed )
   ProdUUID;
 
@@ -22,6 +24,11 @@ authorization master ( instance )
   draft action Discard;
   draft action Resume;
   draft determine action Prepare;
+
+  factory action copyproduct parameter zmk_prod_abs [1];
+
+  //  determination set_first_phase on modify { field Phaseid; create; }
+  determination first_phase_Set on save { field Phaseid; create; }
 
   association _market { create; with draft; }
   association _order { create; with draft; }
@@ -32,6 +39,8 @@ authorization master ( instance )
       prodid          = prodid;
       pgid            = pgid;
       phaseid         = phaseid;
+      PhaseCriticality = phasecriticality;
+      phase           = phase;
       pgname          = pgname;
       height          = height;
       depth           = depth;
@@ -68,6 +77,10 @@ with additional save
   //field ( readonly ) MrktUuid;
   field ( numbering : managed, readonly ) MrktUuid;
   association _product { with draft; }
+  validation validatestartdate on save { create; field startdate; }
+
+  //  factory action ( features : instance )  confirm result [1] $self;
+  action ( features : instance ) confirm result [1] $self;
 
   mapping for ztb_mk_market
     {
@@ -88,12 +101,9 @@ with additional save
 
 define behavior for ZMK_I_ORDER
 implementation in class zbp_mk_i_order unique
-//persistent table ztb_mk_order
 draft table ztb_mk_order_d
 lock dependent by _product
-//lock master total etag last_changed_at
 authorization dependent by _product
-//authorization master ( instance )
 etag master last_changed_at
 with unmanaged save with full data
 {
@@ -107,6 +117,9 @@ with unmanaged save with full data
   field ( numbering : managed, readonly ) MrktUuid;
   field ( numbering : managed, readonly ) OrderUuid;
   association _product { with draft; }
+
+   determination getnetamount on save { create; }
+ // determination getnetamount on modify { create; }
 
   mapping for ztb_mk_order
     {

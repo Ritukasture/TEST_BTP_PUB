@@ -13,8 +13,8 @@ define view entity ZMK_PROD_GRP_VH
 {
       @Search: { defaultSearchElement : true,
                  fuzzinessThreshold   : 0.8  }
-      //@Semantics.text: true
-     // @EndUserText.label: 'Product_ID'
+      @Semantics.text: true
+      @EndUserText.label: 'Product_ID'
   key pgid     as Pgid,
       pgname   as Pgname,
       imageurl as Imageurl

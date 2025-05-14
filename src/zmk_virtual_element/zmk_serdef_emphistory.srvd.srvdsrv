@@ -1,0 +1,4 @@
+@EndUserText.label: 'Employee History'
+define service ZMK_SERDEF_EMPHISTORY {
+  expose ZMK_C_EMPHISTORY;
+}

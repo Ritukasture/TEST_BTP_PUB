@@ -18,6 +18,7 @@ define view entity ZMK_I_PRODUCT as select from ztb_mk_product
     depth as Depth,
     width as Width,
     size_uom as SizeUom,
+    measures as measures,
     @Semantics.amount.currencyCode: 'priceCurrency'
     price as Price,
     price_currency as PriceCurrency,

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition'
+define service ZMK_CUST_ENTITY_SERDEF {
+  expose ZMK_I_PROD_CUSTOM;
+}

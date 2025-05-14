@@ -1,20 +1,24 @@
 @Metadata.layer: #CORE
 
+@UI.lineItem: [{criticality: 'PhaseCriticality'}]
+
 @UI: {
   headerInfo: { typeName: 'Product Details',
                 typeNamePlural: 'Product Details1',
                 title: { type: #STANDARD, label: 'Product Details', value: 'ProdUuid'  },
                 description : { type: #STANDARD,label: 'Product' } } }
 
+@UI.presentationVariant: [{sortOrder: [ {by: 'Prodid', direction: #DESC }] }]
+
 annotate entity ZMK_C_PRODUCT_R with
 {
   @UI.facet: [
-   {
-    id: 'idIdentification',
-    type: #IDENTIFICATION_REFERENCE,
-    label: 'ZC_TB_MK_PRODUCT',
-    position: 10 
-  } ,
+  //   {
+  //    id: 'idIdentification',
+  //    type: #IDENTIFICATION_REFERENCE,
+  //    label: 'Product Information',
+  //    position: 10
+  //  } ,
 
   {
   id: 'id_market',
@@ -30,86 +34,161 @@ annotate entity ZMK_C_PRODUCT_R with
   label: 'Order',
   position: 40,
   targetElement: '_order'
-  }
+  },
+
+  {
+    id: 'Product_Details',
+    type: #COLLECTION,
+    label: 'Product Details',
+    purpose: #STANDARD
+    },
+
+   {
+     id: 'ID',
+     type: #FIELDGROUP_REFERENCE,
+     parentId: 'Product_Details',
+     targetQualifier: 'PROD_IDs',
+     purpose: #STANDARD,
+     position: 5,
+     label: 'IDs'
+     },
+    {
+     id: 'dimention',
+     type: #FIELDGROUP_REFERENCE,
+     parentId: 'Product_Details',
+     targetQualifier: 'Dimention',
+     purpose: #STANDARD,
+     position: 6,
+     label: 'Dimention'
+     },
+
+        {
+     id: 'price',
+     type: #FIELDGROUP_REFERENCE,
+     parentId: 'Product_Details',
+     targetQualifier: 'Price',
+     purpose: #STANDARD,
+     position: 7,
+     label: 'Price'
+     },
+        {
+     id: 'date',
+     type: #FIELDGROUP_REFERENCE,
+     parentId: 'Product_Details',
+     targetQualifier: 'Date',
+     purpose: #STANDARD,
+     position: 8,
+     label: 'Date'
+     }
   ]
 
   //@UI.hidden: true
+  @UI.lineItem: [ { position: 5 ,importance: #MEDIUM, label: 'ProdUuid' } ]
   ProdUuid;
 
   @UI: { selectionField: [{ position: 10}] }
-  @UI.lineItem: [ { position: 10 ,importance: #MEDIUM, label: 'ProdID' } ]
-  @UI.identification: [ { position: 10 , label: 'ProdID' } ]
+  @UI.lineItem: [ { position: 10 ,importance: #MEDIUM, label: 'ProdID' },
+                  { type: #FOR_ACTION, dataAction: 'copyproduct', label: 'Copy Product'}]
+  @UI.fieldGroup: [{position: 10,importance: #HIGH,qualifier: 'PROD_IDs', label: 'ProdID' }]
+  @UI.identification: [ { position: 10 , label: 'ProdID'  } ]
   Prodid;
 
   @UI: { selectionField: [{ position: 20}] }
   @UI.lineItem: [ { position: 20 , importance: #MEDIUM, label: 'PgID' } ]
+  @UI.fieldGroup: [{position: 20,importance: #HIGH,qualifier: 'PROD_IDs', label: 'Pgid' }]
   @UI.identification: [ { position: 20 , label: 'PgID'} ]
   Pgid;
 
-  @UI.lineItem: [ {
-    position: 30 ,
-    importance: #MEDIUM,
-    label: 'PhaseID'
-  } ]
-  @UI.identification: [ {
-    position: 30 ,
-    label: 'PhaseID'
-  } ]
+  @UI.lineItem: [ { position: 30 ,importance: #MEDIUM,label: 'PhaseID', criticality: 'PhaseCriticality'} ]
+  @UI.fieldGroup: [{position: 30,importance: #HIGH,qualifier: 'PROD_IDs', label: 'PhaseID', criticality: 'PhaseCriticality'} ]
+  @UI.identification: [ { position: 30 , label: 'PhaseID' } ]
+  @UI: { dataPoint:{ qualifier: 'Phaseid', title: 'PhaseID', criticality: 'PhaseCriticality',
+       criticalityRepresentation: #WITH_ICON
+          }}
   Phaseid;
+  
+  @UI.lineItem: [ {
+    position: 35 ,
+    importance: #MEDIUM,
+    label: 'Phase'
+  } ]
+  @UI.fieldGroup: [{position: 35,importance: #HIGH,qualifier: 'PROD_IDs', label: 'Phase' }]
+  @UI.identification: [ {
+    position: 35 ,
+    label: 'Phase'
+  } ]
+  
+  phase;  
 
   @UI.lineItem: [ {
     position: 40 ,
     importance: #MEDIUM,
     label: 'Pgname'
   } ]
+  @UI.fieldGroup: [{position: 40,importance: #HIGH,qualifier: 'PROD_IDs', label: 'Pgname' }]
   @UI.identification: [ {
     position: 40 ,
     label: 'Pgname'
   } ]
   Pgname;
 
-  @UI.lineItem: [ {
-    position: 50 ,
-    importance: #MEDIUM,
-    label: 'Height'
-  } ]
+//  @UI.lineItem: [ {
+//    position: 50 ,
+//    importance: #MEDIUM,
+//    label: 'Height'
+//  } ]
+  @UI.fieldGroup: [{position: 50,importance: #HIGH,qualifier: 'Dimention', label: 'Height' },
+                   { position: 50, value: 'Height', type: #STANDARD, qualifier: 'Allmeasures'}]
   @UI.identification: [ {
     position: 50 ,
     label: 'Height'
   } ]
   Height;
 
-  @UI.lineItem: [ {
-    position: 60 ,
-    importance: #MEDIUM,
-    label: 'Depth'
-  } ]
+//  @UI.lineItem: [ {
+//    position: 60 ,
+//    importance: #MEDIUM,
+//    label: 'Depth'
+//  } ]
+  @UI.fieldGroup: [{position: 60,importance: #HIGH,qualifier: 'Dimention', label: 'Depth' },
+                   {position: 50, value: 'Depth', type: #STANDARD, qualifier: 'Allmeasures' }]
   @UI.identification: [ {
     position: 60 ,
     label: 'Depth'
   } ]
   Depth;
 
-  @UI.lineItem: [ {
-    position: 70 ,
-    importance: #MEDIUM,
-    label: 'Width'
-  } ]
+//  @UI.lineItem: [ {
+//    position: 70 ,
+//    importance: #MEDIUM,
+//    label: 'Width'
+//  } ]
+  @UI.fieldGroup: [{position: 70,importance: #HIGH,qualifier: 'Dimention', label: 'Width' },
+                   { position: 50, value: 'Width', type: #STANDARD, qualifier: 'Allmeasures' }]
   @UI.identification: [ {
     position: 70 ,
     label: 'Width'
   } ]
   Width;
-
+  
+  @UI.lineItem: [ { label: 'Size (HxDxW)',
+                    position: 80,
+                    type: #AS_FIELDGROUP,
+                    valueQualifier: 'Allmeasures',
+                    emphasized: true
+                     } ]
+  measures;  
+   
   @UI.lineItem: [ {
     position: 80 ,
     importance: #MEDIUM,
     label: ''
   } ]
+  @UI.fieldGroup: [{position: 80,importance: #HIGH,qualifier: 'Dimention', label: 'SizeUom' }]
   @UI.identification: [ {
     position: 80 ,
     label: ''
-  } ]
+  } ]                
   SizeUom;
 
   @UI.lineItem: [ {
@@ -117,6 +196,7 @@ annotate entity ZMK_C_PRODUCT_R with
     importance: #MEDIUM,
     label: 'Price'
   } ]
+  @UI.fieldGroup: [{position: 90,importance: #HIGH,qualifier: 'Price', label: 'Price' }]
   @UI.identification: [ {
     position: 90 ,
     label: 'Price'
@@ -126,11 +206,12 @@ annotate entity ZMK_C_PRODUCT_R with
   @UI.lineItem: [ {
     position: 100 ,
     importance: #MEDIUM,
-    label: ''
+    label: 'Currency'
   } ]
+  @UI.fieldGroup: [{position: 100,importance: #HIGH,qualifier: 'Price', label: 'Currency' }]
   @UI.identification: [ {
     position: 100 ,
-    label: ''
+    label: 'Currency'
   } ]
   PriceCurrency;
 
@@ -139,10 +220,19 @@ annotate entity ZMK_C_PRODUCT_R with
     importance: #MEDIUM,
     label: 'Taxrate'
   } ]
+  @UI.fieldGroup: [{position: 110,importance: #HIGH,qualifier: 'Price', label: 'Taxrate' }]
   @UI.identification: [ {
     position: 110 ,
     label: 'Taxrate'
   } ]
+
+  @UI: { dataPoint: { qualifier: 'Taxrate',
+                      targetValue: 30,
+                      visualization: #PROGRESS,
+                      criticality: 'Taxrate',
+                      title: 'Tax Progress' },
+         lineItem: [{ cssDefault.width: '15em',
+                      type: #AS_DATAPOINT }] }
   Taxrate;
 
   @UI: { selectionField: [{ position: 30}] }
@@ -155,6 +245,7 @@ annotate entity ZMK_C_PRODUCT_R with
     position: 120 ,
     label: 'CreatedBy'
   } ]
+  @UI.fieldGroup: [{position: 120,importance: #HIGH,qualifier: 'Date', label: 'CreatedBy' }]
   CreatedBy;
 
   @UI.lineItem: [ {
@@ -162,6 +253,7 @@ annotate entity ZMK_C_PRODUCT_R with
     importance: #MEDIUM,
     label: 'CreationTime'
   } ]
+  @UI.fieldGroup: [{position: 130,importance: #HIGH,qualifier: 'Date', label: 'CreationTime' }]
   @UI.identification: [ {
     position: 130 ,
     label: 'CreationTime'
@@ -170,6 +262,7 @@ annotate entity ZMK_C_PRODUCT_R with
 
   @UI: { selectionField: [{ position: 40}] }
   @UI.lineItem: [ { position: 140 ,importance: #MEDIUM, label: 'ChangedBy' } ]
+  @UI.fieldGroup: [{position: 140,importance: #HIGH,qualifier: 'Date', label: 'ChangedBy' }]
   @UI.identification: [ { position: 140 ,label: 'ChangedBy'} ]
   ChangedBy;
 
@@ -178,6 +271,7 @@ annotate entity ZMK_C_PRODUCT_R with
     importance: #MEDIUM,
     label: 'ChangeTime'
   } ]
+  @UI.fieldGroup: [{position: 150,importance: #HIGH,qualifier: 'Date', label: 'ChangeTime' }]
   @UI.identification: [ {
     position: 150 ,
     label: 'ChangeTime'
@@ -186,6 +280,9 @@ annotate entity ZMK_C_PRODUCT_R with
 
   @UI.hidden: true
   locallastchangedat;
+  
+  @UI.hidden: true
+  PhaseCriticality;
   /* Associations */
   //   _market;
   //   _order;

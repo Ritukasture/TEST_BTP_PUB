@@ -16,6 +16,7 @@ association to parent ZMK_I_PRODUCT_R as _product on $projection.ProdUuid = _pro
     key order_uuid as OrderUuid,
     orderid as Orderid,
     quantity as Quantity,
+    @Semantics.calendar.dayOfYear: true
     calendar_year as CalendarYear,
     @Semantics.amount.currencyCode: 'CukyField'
     netamount as Netamount,

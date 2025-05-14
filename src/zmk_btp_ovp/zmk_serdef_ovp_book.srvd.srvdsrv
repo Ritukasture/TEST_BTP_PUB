@@ -1,0 +1,5 @@
+@EndUserText.label: 'OVP: Booking'
+define service zmk_serdef_ovp_book {
+  expose zmk_c_ovp_booking     as OVPBooking;
+  expose zmk_i_ovp_booking_flt as FLTBooking;
+}

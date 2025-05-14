@@ -1,0 +1,35 @@
+@Metadata.layer: #CORE 
+ 
+@UI.chart:[ 
+            { //Chart SUM Book Quantity by Person 
+              qualifier:             'ChartSUMBookQuantityByPerson', 
+              title:                 'Therapy Quantity by Plants', 
+              chartType:             #DONUT, 
+              dimensions:          [ 'PersonId'], 
+              measures:            [ 'BookQuantity'], 
+              dimensionAttributes: [{ dimension:  'PersonId',     role: #CATEGORY }], 
+              measureAttributes:   [{ measure:    'BookQuantity', role: #AXIS_1 }] 
+            } 
+] 
+@UI.presentationVariant:[ 
+                          {  
+                            qualifier:      'pvSUMBookQuantityByPerson', 
+                            visualizations: [{ 
+                                               type:      #AS_CHART, 
+                                               qualifier: 'ChartSUMBookQuantityByPerson' 
+                                            }] 
+                          } 
+] 
+annotate view zmk_c_ovp_booking 
+    with  
+{ 
+   @UI.hidden: true 
+   BookingUuid; 
+   @UI.lineItem: [{ position: 10 }] 
+   BookingId; 
+  // @UI.lineItem: [{ position: 20, label: 'Book'   }] 
+  // BookName; 
+  // @UI.lineItem: [{ position: 30, label: 'Person' }] 
+  // PersonName; 
+    
+} 

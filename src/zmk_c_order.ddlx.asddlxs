@@ -2,18 +2,26 @@
 @UI: {
     headerInfo : { typeName: 'Order Details',
                    typeNamePlural: 'Order Details1',
-                   title: { value: 'ProdUuid'} }}
-                   
+                   title: { value: 'Orderid'} }}
+
 annotate entity ZMK_C_ORDER with
 {
 
   @UI.facet: [
+                  {
+              purpose:    #HEADER,
+              position:   5,
+              importance: #HIGH,
+              type:       #DATAPOINT_REFERENCE,
+              targetQualifier: 'Netamt'
+              } ,
    {
     id: 'idIdentification',
     type: #IDENTIFICATION_REFERENCE,
     label: 'Order',
     position: 10
-  }  ]
+  }
+   ]
 
   @UI:{  lineItem:       [{ position: 10, label:'ProdUuid' }] }
   @UI.identification: [ { position: 10 , label: 'ProdUuid' } ]
@@ -33,9 +41,10 @@ annotate entity ZMK_C_ORDER with
   @UI:{  lineItem:       [{ position: 60, label:'CalendarYear' }] }
   @UI.identification: [ { position: 60 , label: 'CalendarYear' } ]
   CalendarYear;
-  @UI:{  lineItem:       [{ position: 70, label:'Netamount' }] }
-  @UI.identification: [ { position: 70 , label: 'Netamount' } ]
-  Netamount;
+    @UI:{  lineItem:       [{ position: 70, label:'Netamount' }] }
+    @UI.dataPoint: { qualifier: 'Netamt', title: 'Netamount' }
+    @UI.identification: [ { position: 70 , label: 'Netamount' } ]
+    Netamount;
   @UI:{  lineItem:       [{ position: 80, label:'CukyField' }] }
   @UI.identification: [ { position: 80 , label: 'CukyField' } ]
   CukyField;

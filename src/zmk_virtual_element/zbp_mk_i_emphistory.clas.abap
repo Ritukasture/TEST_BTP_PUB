@@ -1,0 +1,5 @@
+CLASS zbp_mk_i_emphistory DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zmk_i_emphistory.
+ENDCLASS.
+
+CLASS zbp_mk_i_emphistory IMPLEMENTATION.
+ENDCLASS.

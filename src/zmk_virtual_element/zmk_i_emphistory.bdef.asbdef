@@ -1,0 +1,29 @@
+managed implementation in class zbp_mk_i_emphistory unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZMK_I_EMPHISTORY //alias <alias_name>
+persistent table zmk_t_emphistory
+lock master total etag  last_changed_at
+draft table zmk_t_emphist_d
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  //field ( readonly ) Name;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zmk_t_emphistory
+  { Name  = name;
+    Startdate = startdate;
+    Enddate   = enddate;
+    last_changed_at = last_changed_at;
+  }
+}

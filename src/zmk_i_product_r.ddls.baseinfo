@@ -3,7 +3,8 @@
 {
 "FROM":
 [
-"ZMK_I_PRODUCT"
+"ZMK_I_PRODUCT",
+"ZTB_MK_PHASE"
 ],
 "ASSOCIATED":
 [
